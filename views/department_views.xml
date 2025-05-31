@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <!-- Department Form View -->
+        <record id="view_department_form" model="ir.ui.view">
+            <field name="name">hms.department.form</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="capacity"/>
+                            <field name="is_opened"/>
+                        </group>
+                        <notebook>
+                            <page string="Patients">
+                                <field name="patient_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Department Tree View -->
+        <record id="view_department_tree" model="ir.ui.view">
+            <field name="name">hms.department.tree</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="is_opened"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Department Action -->
+        <record id="action_department" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">hms.department</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new department.
+                </p>
+            </field>
+        </record>
+
+        <!-- Department Menu -->
+        <menuitem id="menu_department"
+            name="Departments"
+            parent="menu_hms_root"
+            action="action_department"
+            sequence="10"
+        />
+    </data>
+</odoo>

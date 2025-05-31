@@ -14,3 +14,4 @@ class Patient(models.Model):
     image = fields.Image()
     address = fields.Text()
     age = fields.Integer()
+    department_id = fields.Many2one('hms.department', string='Department')
