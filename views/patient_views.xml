@@ -6,22 +6,36 @@
             <field name="model">hms.patient</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
                     <sheet>
                         <group>
-                            <field name="first_name"/>
-                            <field name="last_name"/>
+                            <field name="first_name" required="1"/>
+                            <field name="last_name" required="1"/>
                             <field name="birth_date"/>
                             <field name="age"/>
                             <field name="department_id"/>
+                            <field name="department_capacity"/>
+                            <field name="doctor_ids" widget="many2many_tags"/>
                         </group>
                         <group>
                             <field name="blood_type"/>
                             <field name="pcr"/>
-                            <field name="cr_ratio"/>
+                            <field name="cr_ratio" required="pcr"/>
                         </group>
                         <notebook>
-                            <page string="History">
+                            <page string="History" invisible="age &lt; 50">
                                 <field name="history"/>
+                            </page>
+                            <page string="Logs">
+                                <field name="log_ids" readonly="1">
+                                    <tree>
+                                        <field name="create_uid"/>
+                                        <field name="create_date"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Other Info">
                                 <group>
@@ -45,6 +59,7 @@
                     <field name="last_name"/>
                     <field name="age"/>
                     <field name="department_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
